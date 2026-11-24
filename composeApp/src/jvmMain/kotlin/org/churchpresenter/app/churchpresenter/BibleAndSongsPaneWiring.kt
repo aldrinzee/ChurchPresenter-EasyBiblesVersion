@@ -50,7 +50,8 @@ internal fun MainDesktopScope.BibleTabPane() {
         crossReferences = sharedCrossReferences,
         dialogDismissSignal = dialogDismissSignal,
         sttManager = sttManager,
-        engineStatus = bibleEngineClient
+        engineStatus = bibleEngineClient,
+        showBibleList = live.devMode,
     )
 }
 

@@ -55,6 +55,7 @@ import org.churchpresenter.sharedui.composables.bibleListCard
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material3.Icon
+import org.churchpresenter.settings.showBibleTranslationAt
 
 /** The tab's body under its key handler: the search row, detections, and the browser or a notice. */
 @Composable
@@ -62,6 +63,7 @@ internal fun ColumnScope.BibleTabContent(
     viewModel: BibleViewModel,
     tab: BibleTabScope,
     focusRescue: FocusLostRescueState,
+    showBibleList: Boolean = false,
 ) {
     with(tab) {
         if (loadErrors.isNotEmpty()) {
@@ -159,7 +161,7 @@ internal fun ColumnScope.BibleTabContent(
                 )
             }
         } else {
-            BibleBrowser(viewModel, tab, focusRescue)
+            BibleBrowser(viewModel, tab, focusRescue, showBibleList)
         }
     }
 }
@@ -297,7 +299,12 @@ private fun BibleTabScope.BibleTabDetection(viewModel: BibleViewModel, sttManage
 
 /** The book, chapter and verse browser, with the history panel under it. */
 @Composable
-private fun ColumnScope.BibleBrowser(viewModel: BibleViewModel, tab: BibleTabScope, focusRescue: FocusLostRescueState) {
+private fun ColumnScope.BibleBrowser(
+    viewModel: BibleViewModel,
+    tab: BibleTabScope,
+    focusRescue: FocusLostRescueState,
+    showBibleList: Boolean,
+) {
     with(tab) {
         val crossRefCountStr = stringResource(Res.string.bible_cross_references_count)
         val crossRefPopoverTitleStr = stringResource(Res.string.bible_cross_references_popover_title)
@@ -388,10 +395,25 @@ private fun ColumnScope.BibleBrowser(viewModel: BibleViewModel, tab: BibleTabSco
                 liveVerseNumbers = liveVerseNumbers,
                 onLiveVerseClicked = { verseNum -> liveVerseClicked(viewModel, verseNum) },
                 verseHeader = { showLabel -> BibleTabVerseHeader(viewModel, showLabel) },
+                leadingColumn = bibleListColumn(showBibleList),
             ) {
                 BibleTabHistory(viewModel)
             }
         }
+    }
+}
+
+/** The Bibles list for the browser's leading column, or null when it is off. */
+private fun BibleTabScope.bibleListColumn(show: Boolean): (@Composable () -> Unit)? = if (!show) null else {
+    {
+        BibleVersionsColumn(
+            storageDirectory = appSettings.bibleSettings.storageDirectory,
+            stack = appSettings.bibleSettings.translationList(),
+            onShowBible = { place, fileName ->
+                onSettingsChange { s -> s.showBibleTranslationAt(place, fileName) }
+                focusRequester.requestFocus()
+            },
+        )
     }
 }
 

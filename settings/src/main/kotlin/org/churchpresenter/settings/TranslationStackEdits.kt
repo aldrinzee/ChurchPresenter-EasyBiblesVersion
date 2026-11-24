@@ -37,6 +37,33 @@ fun AppSettings.moveBibleTranslation(index: Int, offset: Int): AppSettings {
     return copy(bibleSettings = bibleSettings.moveTranslation(index, offset)).withLooksKeptInPlace(stack)
 }
 
+/**
+ * The Bible tab's Bibles list: shows [fileName] at place [position] of the stack.
+ *
+ * A Bible already elsewhere in the stack trades places with the one at [position], so primary and
+ * secondary can be flipped from the list as well as by the swap button. One that is not in the
+ * stack replaces the Bible at [position] ([replaceBibleTranslation], which keeps each place's
+ * look), or joins the end when the stack has no such place yet. Every profile keeps the places it
+ * shows, so each output switches to the new Bible with nothing else changing.
+ */
+fun AppSettings.showBibleTranslationAt(position: Int, fileName: String): AppSettings {
+    val stack = bibleSettings.translationList()
+    if (fileName.isBlank() || position < 0) return this
+    val current = stack.indexOfFirst { it.fileName == fileName }
+    return when {
+        current == position -> this
+        current >= 0 && position in stack.indices -> {
+            val (first, second) = minOf(current, position) to maxOf(current, position)
+            // Two moves make a swap: the later one up to the earlier place, then the earlier one
+            // (now one further down) back to where the later one was.
+            moveBibleTranslation(second, first - second).moveBibleTranslation(first + 1, second - first - 1)
+        }
+        current >= 0 -> this
+        position in stack.indices -> replaceBibleTranslation(position, fileName)
+        else -> copy(bibleSettings = bibleSettings.addTranslation(fileName))
+    }
+}
+
 /** The Bible tab's swap button: the first two translations exchange places. */
 fun AppSettings.swapBibleTranslations(): AppSettings = moveBibleTranslation(0, 1)
 

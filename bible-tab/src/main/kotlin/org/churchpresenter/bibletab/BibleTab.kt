@@ -116,6 +116,11 @@ fun BibleTab(
     sttManager: STTManager? = null,
     engineStatus: BibleEngineStatus? = null,
     dialogDismissSignal: Int = 0,
+    /**
+     * The Bibles list beside the books: double-click a Bible to put it on screen. Dev mode only
+     * until it is approved for production -- the app passes its dev-mode flag.
+     */
+    showBibleList: Boolean = false,
 ) {
     val focusRequester = remember { FocusRequester() }
     val crossRefs = rememberBibleTabCrossRefs(viewModel, appSettings, crossReferences, verseSequenceLog)
@@ -189,7 +194,7 @@ fun BibleTab(
             .focusable()
             .onPreviewKeyEvent { tab.handleKeyEvent(viewModel, it) }
     ) {
-        BibleTabContent(viewModel, tab, focusRescue)
+        BibleTabContent(viewModel, tab, focusRescue, showBibleList)
     }
 }
 

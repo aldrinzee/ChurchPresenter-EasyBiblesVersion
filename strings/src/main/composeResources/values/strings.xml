@@ -1692,6 +1692,15 @@
     <string name="video_files_filter">Video Files (*.mp4, *.mov, *.avi, *.mkv, *.webm)</string>
     <string name="swap_bibles">Swap</string>
     <string name="swap_bibles_hint">Swap primary and secondary Bibles</string>
+    <!-- Bible tab: Bibles list -->
+    <string name="bible_list_title">Bibles</string>
+    <string name="bible_list_target_primary">Primary</string>
+    <string name="bible_list_target_secondary">Secondary</string>
+    <string name="bible_list_target_place">%1$d</string>
+    <string name="bible_list_target_hint">Which Bible a double-click replaces</string>
+    <string name="bible_list_row_hint">Double-click to show %1$s as the %2$s Bible</string>
+    <string name="bible_list_empty">No Bibles installed</string>
+    <string name="bible_list_scanning">Looking for Bibles…</string>
     <string name="new_song">New Song</string>
     <string name="back_to_live">Back to Live</string>
     <string name="line_navigation_hint">Use %1$s to navigate lines, %2$s for verses</string>

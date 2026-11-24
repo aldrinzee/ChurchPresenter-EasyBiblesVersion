@@ -121,13 +121,15 @@ internal fun ColumnScope.BibleBrowserPane(
     verseHeader: @Composable (showLabel: Boolean) -> Unit,
     /** Whether picking a verse near the bottom scrolls the next ones into view (Settings → Bible). */
     verseScrollAhead: Boolean = true,
+    /** Drawn left of the books, with its own drag handle -- the Bibles list, when it is on. */
+    leadingColumn: (@Composable () -> Unit)? = null,
     /** Drawn under the verse pane, inside the same column — the history panel. */
     footer: @Composable () -> Unit,
 ) {
     val density = LocalDensity.current
         Row(modifier = Modifier.fillMaxWidth().weight(1f).padding(start = 4.dp, end = 4.dp, bottom = 4.dp)) {
             BookCard(
-                books = books,
+                leading = leadingColumn, books = books,
                 filteredBooks = filteredBooks,
                 selectedBookIndex = selectedBookIndex,
                 bookWidthPx = bookWidthPx,
@@ -409,6 +411,8 @@ private val CHAPTER_LIST_TOP_INSET = 6.dp
 
 @Composable
 private fun BookCard(
+    /** Drawn before the card, in the same row -- the Bibles list. */
+    leading: (@Composable () -> Unit)?,
     books: List<String>,
     filteredBooks: List<String>,
     selectedBookIndex: Int,
@@ -417,6 +421,7 @@ private fun BookCard(
     onSaveColumnWidths: () -> Unit,
     onBookSelected: (Int) -> Unit,
 ) {
+    leading?.invoke()
     val density = LocalDensity.current
     Column(modifier = Modifier.width(with(density) { bookWidthPx.toDp() }).fillMaxHeight().bibleListCard()) {
         Box(
