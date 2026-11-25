@@ -115,6 +115,9 @@ import org.churchpresenter.strings.generated.resources.tooltip_italic
 import org.churchpresenter.strings.generated.resources.tooltip_strikethrough
 import org.churchpresenter.strings.generated.resources.tooltip_underline
 import org.churchpresenter.strings.generated.resources.top
+import org.churchpresenter.strings.generated.resources.customize_translation_label_after_abbreviation
+import org.churchpresenter.strings.generated.resources.customize_translation_label_after_name
+import org.churchpresenter.strings.generated.resources.customize_translation_label_before
 import org.churchpresenter.stt.presenter.LAYOUT_INTERLEAVED
 import org.jetbrains.compose.resources.StringResource
 
@@ -227,4 +230,7 @@ internal val SETTING_VALUE_STRINGS: Map<String, StringResource> = mapOf(
     WebPageView.DESKTOP.name to Res.string.desktop_view,
     WebPageView.MOBILE.name to Res.string.mobile_view,
     WebPageView.FOLLOW_WEB_TAB.name to Res.string.profile_web_page_view_follow,
+    Constants.TRANSLATION_LABEL_BEFORE to Res.string.customize_translation_label_before,
+    Constants.TRANSLATION_LABEL_AFTER_ABBREVIATION to Res.string.customize_translation_label_after_abbreviation,
+    Constants.TRANSLATION_LABEL_AFTER_NAME to Res.string.customize_translation_label_after_name,
 )

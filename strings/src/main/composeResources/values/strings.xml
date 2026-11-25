@@ -1067,6 +1067,10 @@
     <string name="customize_type_image">Image</string>
     <string name="percent_suffix">%</string>
     <string name="customize_show_abbreviation">Abbreviation</string>
+    <string name="customize_translation_label_style">Translation label</string>
+    <string name="customize_translation_label_before">KJV John 3:16</string>
+    <string name="customize_translation_label_after_abbreviation">John 3:16 (KJV)</string>
+    <string name="customize_translation_label_after_name">John 3:16 (Full name)</string>
     <string name="customize_background_opacity">Opacity</string>
     <string name="content_bible_translations_all">All</string>
 
@@ -4836,6 +4840,7 @@
     <string name="setting_field_shift_x">Offset x</string>
     <string name="setting_field_shift_y">Offset y</string>
     <string name="setting_field_show_abbreviation">Show abbreviation</string>
+    <string name="setting_field_translation_label_style">Translation label</string>
     <string name="setting_field_show_definition">Show definition</string>
     <string name="setting_field_show_end_of_song_indicator">Show end of song indicator</string>
     <string name="setting_field_show_in_progress">Show in progress</string>

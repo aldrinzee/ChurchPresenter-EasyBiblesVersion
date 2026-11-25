@@ -93,6 +93,8 @@ internal fun bibleSampleVerses(
             // what the box offers as its placeholder. Derived from the module title where it has
             // one, and only then from the file name.
             bibleAbbreviation = defaultTranslationAbbreviation(moduleTitle, translation.fileName),
+            // The full name the reference can be labelled with: the rename, else the module's own.
+            bibleName = translation.customName.trim().ifBlank { moduleTitle },
             bookName = verse?.bookName?.takeIf { it.isNotBlank() } ?: sampleBook,
             chapter = verse?.chapter ?: target.chapter,
             verseNumber = verse?.verseNumber ?: target.verse,

@@ -124,15 +124,20 @@ internal fun BibleTranslationSettings.referenceOutlineFor(lowerThird: Boolean): 
     if (lowerThird) lowerThirdReferenceOutline else referenceOutline
 
 internal fun buildRefText(verse: SelectedVerse, translation: BibleTranslationSettings): String {
-    val label = if (translation.showAbbreviation) {
-        translation.customAbbreviation.trim().ifBlank { verse.bibleAbbreviation.trim() }
-    } else {
-        ""
-    }
+    val abbreviation = translation.customAbbreviation.trim().ifBlank { verse.bibleAbbreviation.trim() }
     val verseRef = if (verse.verseRange.isNotEmpty()) verse.verseRange else verse.verseNumber.toString()
-    return listOf(label, verse.bookName, "${verse.chapter}:$verseRef")
-        .filter { it.isNotEmpty() }
-        .joinToString(" ")
+    val citation = listOf(verse.bookName, "${verse.chapter}:$verseRef").filter { it.isNotEmpty() }.joinToString(" ")
+    if (!translation.showAbbreviation) return citation
+    // After the citation, in brackets: by abbreviation, or by the translation's full name -- the
+    // operator's rename where there is one, which is what the verse carries as its name. A module
+    // with no name falls back to its abbreviation rather than to empty brackets.
+    val bracketed = when (translation.translationLabelStyle) {
+        Constants.TRANSLATION_LABEL_AFTER_ABBREVIATION -> abbreviation
+        Constants.TRANSLATION_LABEL_AFTER_NAME -> verse.bibleName.trim().ifBlank { abbreviation }
+        else -> null
+    }
+    if (bracketed != null) return if (bracketed.isEmpty()) citation else "$citation ($bracketed)"
+    return listOf(abbreviation, citation).filter { it.isNotEmpty() }.joinToString(" ")
 }
 
 @Composable

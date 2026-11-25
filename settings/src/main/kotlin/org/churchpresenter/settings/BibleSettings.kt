@@ -68,6 +68,12 @@ data class BibleTranslationSettings(
      * only way to get a label.
      */
     val showAbbreviation: Boolean = false,
+    /**
+     * How [showAbbreviation]'s label sits in the reference: one of the `Constants.TRANSLATION_LABEL_*`
+     * styles. Before the reference by default, so settings written before this choice existed draw
+     * exactly what they did.
+     */
+    val translationLabelStyle: String = Constants.TRANSLATION_LABEL_BEFORE,
     val referenceBold: Boolean = false,
     val referenceItalic: Boolean = false,
     val referenceUnderline: Boolean = false,

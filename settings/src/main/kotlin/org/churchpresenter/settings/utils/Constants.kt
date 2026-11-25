@@ -35,6 +35,16 @@ object Constants {
     const val TEXT_TRANSFORM_LOWERCASE = "Lowercase"
     const val TEXT_TRANSFORM_CAPITALIZE = "Capitalize"
 
+    /**
+     * Where a verse reference names its translation, when it names one at all
+     * ([BibleTranslationSettings.showAbbreviation]): before it ("KJV John 3:16", as it always was),
+     * or after it in brackets, by abbreviation ("John 3:16 (KJV)") or by full name
+     * ("John 3:16 (King James Version)").
+     */
+    const val TRANSLATION_LABEL_BEFORE = "TranslationBefore"
+    const val TRANSLATION_LABEL_AFTER_ABBREVIATION = "TranslationAfterAbbreviation"
+    const val TRANSLATION_LABEL_AFTER_NAME = "TranslationAfterName"
+
     const val FIRST_PAGE = "First Page"
     const val EVERY_PAGE = "Every Page"
     const val TOP = "Top"

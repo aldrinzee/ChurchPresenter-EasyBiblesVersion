@@ -275,6 +275,7 @@ private fun BibleTextGroup(
                             edit.shown.showAbbreviation,
                             { v -> edit.updateEntry { it.copy(showAbbreviation = v) } },
                         )
+                        if (edit.shown.showAbbreviation) TranslationLabelStyleRow(edit)
                     }
                 },
                 extraBasic = { BibleBoxRows(boxes, edit) },
