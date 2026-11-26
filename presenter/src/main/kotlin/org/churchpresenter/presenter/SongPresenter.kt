@@ -119,8 +119,14 @@ fun SongPresenter(
         if (own === appSettings.songSettings) appSettings else appSettings.copy(songSettings = own)
     }
     val ss = songAppSettings.songSettings
+    // Holy names raised here, once, so the slide, its fit, the band and the chart all read the same.
+    val holyNames = rememberHolyNameCapitalizer(ss)
+    val shownSection = remember(lyricSection, holyNames) { holyNames?.let(lyricSection::withHolyNames) ?: lyricSection }
+    val shownSections = remember(allLyricSections, holyNames) {
+        holyNames?.let { c -> allLyricSections.map { it.withHolyNames(c) } } ?: allLyricSections
+    }
     val look = SongLook(
-        lyricSection = lyricSection,
+        lyricSection = shownSection,
         appSettings = songAppSettings,
         isLowerThird = isLowerThird,
         isLowerThirdVertical = isLowerThirdVertical,
@@ -128,7 +134,7 @@ fun SongPresenter(
         transitionAlpha = transitionAlpha,
         displayLineIndex = displayLineIndex,
         lookAheadEnabled = lookAheadEnabled,
-        allLyricSections = allLyricSections,
+        allLyricSections = shownSections,
         displaySectionIndex = displaySectionIndex,
         showBackground = showBackground,
         crossfadeEnabled = crossfadeEnabled,
@@ -213,13 +219,17 @@ private fun SongLook.SongLottieBandLayer(loaded: BibleLottieTemplate, modifier: 
             ),
         )
         val outgoing = LocalBandOutgoing.current
+        val holyNames = rememberHolyNameCapitalizer(ss)
+        val outgoingSection = remember(outgoing.lyricSection, holyNames) {
+            outgoing.lyricSection?.let { s -> holyNames?.let(s::withHolyNames) ?: s }
+        }
         SongLottieBand(
             template = loaded,
             section = lyricSection,
             settings = ss,
             languages = activeLanguages,
             lineIndex = LocalBandSongLineIndex.current.takeIf { it >= 0 } ?: displayLineIndex,
-            outgoingSection = outgoing.lyricSection,
+            outgoingSection = outgoingSection,
             outgoingLineIndex = outgoing.lyricLineIndex,
             allSections = allLyricSections,
             displaySectionIndex = displaySectionIndex,

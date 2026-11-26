@@ -440,6 +440,7 @@ private fun SlidesGroup(song: SongSettings, lowerThird: Boolean, updateSong: ((S
             },
         )
         SectionLabelSwitch(song.layoutExtras.sectionLabel.enabled, updateSong)
+        HolyNamesRows(song, updateSong)
     }
 }
 
@@ -520,7 +521,7 @@ private val SLIDES_PATHS = listOf(
     titleSlideBackgroundPath(lowerThird = false), titleSlideBackgroundPath(lowerThird = true), "songSettings.wordWrap",
     "songSettings.autoRepeatChorus", "songSettings.showEndOfSongIndicator",
     "songSettings.endOfSongIndicatorSpacing", "$SECTION_LABEL_PATH.enabled",
-)
+) + HOLY_NAMES_PATHS
 
 /** Where the Text group's rows store [element]'s look, on a linked profile; none elsewhere. */
 @Composable

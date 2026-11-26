@@ -122,6 +122,18 @@ data class SongLayoutExtras(
      */
     val thirdVoiceColor: String = DEFAULT_THIRD_VOICE_COLOR,
     /**
+     * Whether [holyNames] are capitalised where a song writes them in lowercase -- "god" drawn as
+     * "God", "holy spirit" as "Holy Spirit". Applied as the slide is drawn, like the case transform,
+     * so the stored lyrics never change and switching it off puts them back as they were written.
+     */
+    val capitalizeHolyNames: Boolean = false,
+    /**
+     * The names [capitalizeHolyNames] raises, each written the way it should appear. A list the
+     * operator edits rather than a fixed one: "lord" or "lamb" is not a holy name in every song,
+     * and a church singing in another language adds its own.
+     */
+    val holyNames: List<String> = DEFAULT_HOLY_NAMES,
+    /**
      * The Lottie template the full-screen title slide plays instead of drawing its number, title and
      * credits itself; empty, or a file that is gone, draws the title slide as it always was. The
      * template fills its `TextN` layers with the number and title and its `ReferenceN` layers with
@@ -241,3 +253,10 @@ fun SongSettings.withElementShift(key: String, shift: SongElementShift): SongSet
         ),
     )
 }
+
+/** The names [SongLayoutExtras.holyNames] starts with, each as it should appear. */
+val DEFAULT_HOLY_NAMES: List<String> = listOf(
+    "God", "Jesus", "Christ", "Lord", "Holy Spirit", "Holy Ghost", "Messiah", "Savior", "Saviour",
+    "Redeemer", "Emmanuel", "Immanuel", "Yahweh", "Jehovah", "Almighty", "Lamb of God",
+    "King of Kings", "Lord of Lords", "Prince of Peace", "Alpha and Omega", "Calvary", "Zion",
+)

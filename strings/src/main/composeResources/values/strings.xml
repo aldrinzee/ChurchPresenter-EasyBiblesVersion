@@ -4841,6 +4841,13 @@
     <string name="setting_field_shift_y">Offset y</string>
     <string name="setting_field_show_abbreviation">Show abbreviation</string>
     <string name="setting_field_translation_label_style">Translation label</string>
+    <string name="setting_field_capitalize_holy_names">Capitalize holy names</string>
+    <string name="setting_field_holy_names">Holy names</string>
+    <string name="profile_capitalize_holy_names">Capitalize holy names</string>
+    <string name="profile_capitalize_holy_names_sub">Shows God, Jesus, Holy Spirit and the names below with capitals when a song types them in lowercase. The saved song is not changed.</string>
+    <string name="profile_holy_names_placeholder">God, Jesus, Holy Spirit</string>
+    <string name="profile_holy_names_hint">Separate names with commas, written as they should appear.</string>
+    <string name="profile_holy_names_reset">Reset list</string>
     <string name="setting_field_show_definition">Show definition</string>
     <string name="setting_field_show_end_of_song_indicator">Show end of song indicator</string>
     <string name="setting_field_show_in_progress">Show in progress</string>
